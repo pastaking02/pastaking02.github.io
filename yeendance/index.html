@@ -7,4 +7,93 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <img src="mightyena-left-squish.png" id="mightyena1"
+    style="image-rendering: pixelated;"
+    width="256" height="256"></img>
+    <img src="mightyena-left-stretch.png" id="mightyena2"
+    style="image-rendering: pixelated;"
+    width="256" height="256"></img>
+    <img src="mightyena-left-squish.png" id="mightyena3"
+    style="image-rendering: pixelated;"
+    width="256" height="256"></img>
+    <img src="mightyena-left-stretch.png" id="mightyena4"
+    style="image-rendering: pixelated;"
+    width="256" height="256"></img>
+    <script>
+      let active = false;
+      console.log(active);
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      function play() {
+        var audio = document.getElementById("audio");
+        audio.addEventListener('ended', function() {
+        active = false; console.log(active);
+        }, false);
+        active = true
+        console.log(active);
+        audio.play();
+        tempoMain();
+      }
+      function leftSquish(img){
+        img.src = "mightyena-left-squish.png";
+      }
+      function rightSquish(img){
+        img.src = "mightyena-right-squish.png";
+      }
+      function leftStretch(img){
+        img.src = "mightyena-left-stretch.png";
+      }
+      function rightStretch(img){
+        img.src = "mightyena-right-stretch.png";
+      }
+      async function renderer(beat){
+        let m1 = document.getElementById("mightyena1");
+        let m2 = document.getElementById("mightyena2");
+        let m3 = document.getElementById("mightyena3");
+        let m4 = document.getElementById("mightyena4");
+        if (beat == 1){
+          leftSquish(m1);
+          leftStretch(m2);
+          rightSquish(m3);
+          rightStretch(m4);
+        }
+        else if (beat == 2){
+          rightStretch(m1);
+          leftSquish(m2);
+          leftStretch(m3);
+          rightSquish(m4);
+        }
+        else if (beat == 3){
+          rightSquish(m1);
+          rightStretch(m2);
+          leftSquish(m3);
+          leftStretch(m4);
+        }
+        else if (beat == 4){
+          leftStretch(m1);
+          rightSquish(m2);
+          rightStretch(m3);
+          leftSquish(m4);
+        }
+      }
+      async function tempoMain() {
+        var bpm = 172;
+        var ms = 1000 * (60 / bpm);
+        console.log(ms);
+        count = 0;
+        beat = 1;
+        while((count < 100) && active){
+          await sleep(ms);
+          console.log(beat);
+          renderer(beat);
+          beat = beat + 1;
+          if(beat == 5) beat = 1;
+          count = count + 1;
+        }
+      }
+    </script>
+
+    <input type="button" value="PLAY" onclick="play()">
+    <audio id="audio" src="cancan.mp3"></audio>
 </body>
