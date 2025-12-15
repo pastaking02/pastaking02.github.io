@@ -7,20 +7,180 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <img src="mightyena-left-squish.png" id="mightyena1"
-    style="image-rendering: pixelated;"
-    width="256" height="256"></img>
-    <img src="mightyena-left-stretch.png" id="mightyena2"
-    style="image-rendering: pixelated;"
-    width="256" height="256"></img>
-    <img src="mightyena-left-squish.png" id="mightyena3"
-    style="image-rendering: pixelated;"
-    width="256" height="256"></img>
-    <img src="mightyena-left-stretch.png" id="mightyena4"
-    style="image-rendering: pixelated;"
-    width="256" height="256"></img>
+    <div>
+      <img src="mightyena-down-left.png" id="mightyena1"
+      style="image-rendering: pixelated;"
+      width="256" height="256"></img>
+      <img src="mightyena-down-left.png" id="mightyena2"
+      style="image-rendering: pixelated;"
+      width="256" height="256"></img>
+      <img src="mightyena-down-left.png" id="mightyena3"
+      style="image-rendering: pixelated;"
+      width="256" height="256"></img>
+      <img src="mightyena-down-left.png" id="mightyena4"
+      style="image-rendering: pixelated;"
+      width="256" height="256"></img>
+    </div>
+    <div>
+      <input type="button" value="PLAY" onclick="play()">
+      <input type="button" value="TWIRL" onclick="renderer(1, 'allTwirl', 400)">
+    </div>
     <script>
+      let dancelist = [
+        "skip",
+        // pickup
+        "allLeft", "skip", "skip", "skip",
+        // intro: measure 1
+        "skip", "skip", "skip", "skip",
+        // intro: measure 2
+        "allRight", "skip", "skip", "skip",
+        // intro: measure 3
+        "skip", "skip", "skip", "skip",
+        // intro: measure 4
+        "allLeft", "skip", "skip", "skip",
+        // intro: measure 5
+        "allRight", "skip", "skip", "skip",
+        // intro: measure 6
+        "allLeft", "skip", "allRight", "skip",
+        // intro: measure 7
+        "allLeft", "allRight", "allLeft", "allRight",
+        // intro: measure 8
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        // A: measure 1
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        // A: measure 2
+        "allLeft", "allRight", "allLeft", "allRight",
+        // A: measure 3
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // A: measure 4
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        // A: measure 5
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        // A: measure 6
+        "allLeft", "allRight", "allLeft", "allRight",
+        // A: measure 7
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // A: measure 8
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "speedfunny2",
+        // B: measure 1
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // B: measure 2
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        // B: measure 3
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // B: measure 4
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        // B: measure 5
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // B: measure 6
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        // B: measure 7
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // B: measure 8
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        //"speedfunny",
+        // B: measure 9
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        // B: measure 10
+        "allLeft", "allRight",
+        // B: measure 11 
+        "allLeft", "allRight",
+        // B: measure 12
+        "allTwirl", "allTwirl",
+        // B: measure 13
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        // BACK TO A
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        // A: measure 1
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        // A: measure 2
+        "allLeft", "allRight", "allLeft", "allRight",
+        // A: measure 3
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // A: measure 4
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        // A: measure 5
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        // A: measure 6
+        "allLeft", "allRight", "allLeft", "allRight",
+        // A: measure 7
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        // A: measure 8
+        "allLeft", "allRight",
+        "allLeft", "allRight",
+        "allLeft", "allRight",
+        "allLeft", "allRight",
+        "allLeft", "allRight",
+        "allLeft", "allRight",
+        "allLeft", "allRight",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
+        "m1Left", "m2Left", "m3Left", "m4Left",
+        "m1Right", "m2Right", "m3Right", "m4Right",
+        // ONTO THE FINALE !
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allLeft", "allRight", "allLeft", "allRight",
+
+        "allLeft", "allRight", "allLeft", "allRight",
+        "allTwirl", "skip", "skip", "skip",
+        
+        "allTwirl", "skip", "skip", "skip",
+        "allTwirl", "skip", "skip", "skip",
+        "allTwirl", "skip", "skip", "skip",
+        "allTwirl", "skip", "skip", "skip",
+
+        "allTwirl", "skip", "skip", "skip",
+
+        "allTwirl",
+
+      ];
       let active = false;
+      let firstOrientation = "downLeft";
+      let secondOrientation = "downLeft";
+      let thirdOrientation = "downLeft";
+      let fourthOrientation = "downLeft";
       console.log(active);
       function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -47,53 +207,208 @@
       function rightStretch(img){
         img.src = "mightyena-right-stretch.png";
       }
-      async function renderer(beat){
+      function upLeft(img){
+        img.src = "mightyena-up-left.png";
+      }
+      function upRight(img){
+        img.src = "mightyena-up-right.png";
+      }
+      function downLeft(img){
+        img.src = "mightyena-down-left.png";
+      }
+      function downRight(img){
+        img.src = "mightyena-down-right.png";
+      }
+      function allLeft(m1, m2, m3, m4){
+        leftStretch(m1);
+        leftStretch(m2);
+        leftStretch(m3);
+        leftStretch(m4);
+        firstOrientation = "leftStretch";
+        secondOrientation = "leftStretch";
+        thirdOrientation = "leftStretch"; 
+        fourthOrientation = "leftStretch";
+        console.log("Turned to the left!");
+      }
+      function allRight(m1, m2, m3, m4){
+        rightStretch(m1);
+        rightStretch(m2);
+        rightStretch(m3);
+        rightStretch(m4);
+        firstOrientation = "rightStretch"; 
+        secondOrientation = "rightStretch"; 
+        thirdOrientation = "rightStretch"; 
+        fourthOrientation = "rightStretch";
+        console.log("Turned to the right!");
+      }
+      function allLeftPaw(m1, m2, m3, m4){
+        downLeft(m1);
+        downLeft(m2);
+        downLeft(m3);
+        downLeft(m4);
+        firstOrientation = "downLeft"; 
+        secondOrientation = "downLeft";  
+        thirdOrientation = "downLeft"; 
+        fourthOrientation = "downLeft"; 
+      }
+      function allRightPaw(m1, m2, m3, m4){
+        downRight(m1);
+        downRight(m2);
+        downRight(m3);
+        downRight(m4);
+        firstOrientation = "downRight"; 
+        secondOrientation = "downRight";  
+        thirdOrientation = "downRight"; 
+        fourthOrientation = "downRight"; 
+      }
+      function moveNextOrientation(m, orientation){
+        switch(orientation){
+          case "downLeft":
+            downRight(m);
+            return "downRight";
+          case "downRight":
+            rightSquish(m);
+            return "rightSquish";
+          case "rightSquish":
+            rightStretch(m);
+            return "rightStretch";
+          case "rightStretch":
+            upLeft(m);
+            return "upLeft";
+          case "upLeft":
+            upRight(m);
+            return "upRight";
+          case "upRight":
+            leftStretch(m);
+            return "leftStretch";
+          case "leftStretch":
+            leftSquish(m);
+            return "leftSquish";
+          case "leftSquish":
+            downLeft(m);
+            return "downLeft";
+          default:
+            console.log("Ayy yo this is not intended");
+        }
+      }
+      async function twirl(m, orientation, ms){
+        for(let i = 0; i < 8; i++)
+        {
+          orientation = moveNextOrientation(m, orientation);
+          if(i == 7) break;
+          await sleep(ms/8);
+        }
+      }
+      async function allTwirl(m1, m2, m3, m4, ms){
+        twirl(m1, firstOrientation, ms);
+        twirl(m2, secondOrientation, ms);
+        twirl(m3, thirdOrientation, ms);
+        twirl(m4, fourthOrientation, ms);
+      }
+      async function renderer(beat, move, ms){
         let m1 = document.getElementById("mightyena1");
         let m2 = document.getElementById("mightyena2");
         let m3 = document.getElementById("mightyena3");
         let m4 = document.getElementById("mightyena4");
-        if (beat == 1){
-          leftSquish(m1);
-          leftStretch(m2);
-          rightSquish(m3);
-          rightStretch(m4);
-        }
-        else if (beat == 2){
-          rightStretch(m1);
-          leftSquish(m2);
-          leftStretch(m3);
-          rightSquish(m4);
-        }
-        else if (beat == 3){
-          rightSquish(m1);
-          rightStretch(m2);
-          leftSquish(m3);
-          leftStretch(m4);
-        }
-        else if (beat == 4){
-          leftStretch(m1);
-          rightSquish(m2);
-          rightStretch(m3);
-          leftSquish(m4);
+        switch (move) {
+          case "m1Left":
+            leftStretch(m1);
+            firstOrientation = "leftStretch";
+            break;
+          case "m2Left":
+            leftStretch(m2);
+            secondOrientation = "leftStretch";
+            break;
+          case "m3Left":
+            leftStretch(m3);
+            thirdOrientation = "leftStretch";
+            break;
+          case "m4Left":
+            leftStretch(m4);
+            fourthOrientation = "leftStretch";
+            break;
+          case "m1Right":
+            rightStretch(m1);
+            firstOrientation = "rightStretch";
+            break;
+          case "m2Right":
+            rightStretch(m2);
+            secondOrientation = "rightStretch";
+            break;
+          case "m3Right":
+            rightStretch(m3);
+            thirdOrientation = "rightStretch";
+            break;
+          case "m4Right":
+            rightStretch(m4);
+            fourthOrientation = "rightStretch";
+            break;
+          case "allLeft":
+            allLeft(m1, m2, m3, m4);
+            break;
+          case "allRight":
+            allRight(m1, m2, m3, m4);
+            break;
+          case "allLeftPaw":
+            allLeftPaw(m1, m2, m3, m4);
+            break;
+          case "allRightPaw":
+            allRightPaw(m1, m2, m3, m4);
+            break;
+          case "m1Twirl":
+            twirl(m1, firstOrientation, ms);
+            break;
+          case "m2Twirl":
+            twirl(m2, secondOrientation, ms);
+            break;
+          case "m3Twirl":
+            twirl(m3, thirdOrientation, ms);
+            break;
+          case "m4Twirl":
+            twirl(m4, fourthOrientation, ms);
+            break;
+          case "allTwirl":
+            allTwirl(m1, m2, m3, m4, ms);
+            break;
+          case "skip":
+            break;
+          default:
+            break;
         }
       }
       async function tempoMain() {
-        var bpm = 172;
-        var ms = 1000 * (60 / bpm);
+        let bpm = 85 * 2;
+        let ms = 1000 * (60 / bpm);
         console.log(ms);
-        count = 0;
-        beat = 1;
-        while((count < 100) && active){
-          await sleep(ms);
+        beat = 0;
+        index = 0;
+        while(dancelist.length > 0 && active){
+          //console.log(dancelist);
+          move = dancelist[index];
+          index = index + 1;
+          console.log(move);
           console.log(beat);
-          renderer(beat);
+          console.log(firstOrientation);
+          if(move == "speedfunny"){
+            bpm = 2 * 110;
+            ms = 1000 * (60 / bpm);
+            continue;
+          }
+          if(move == "speedfunny2"){
+            bpm = 2 * 89.5;
+            ms = 1000 * (60 / bpm);
+          }
+          if(move == "slowdown"){
+            bpm = bpm - 8;
+            ms = 1000 * (60 / bpm);
+            continue;
+          }
+          renderer(beat, move, ms);
+          await sleep(ms);
           beat = beat + 1;
           if(beat == 5) beat = 1;
-          count = count + 1;
         }
       }
     </script>
-
-    <input type="button" value="PLAY" onclick="play()">
     <audio id="audio" src="cancan.mp3"></audio>
 </body>
