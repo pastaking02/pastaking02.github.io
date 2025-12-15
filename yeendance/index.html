@@ -7,23 +7,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div>
+    <div style="background-color: #88b868;">
       <img src="mightyena-down-left.png" id="mightyena1"
       style="image-rendering: pixelated;"
-      width="256" height="256"></img>
+      width="128" height="128"></img>
       <img src="mightyena-down-left.png" id="mightyena2"
       style="image-rendering: pixelated;"
-      width="256" height="256"></img>
+      width="128" height="128"></img>
       <img src="mightyena-down-left.png" id="mightyena3"
       style="image-rendering: pixelated;"
-      width="256" height="256"></img>
+      width="128" height="128"></img>
       <img src="mightyena-down-left.png" id="mightyena4"
       style="image-rendering: pixelated;"
-      width="256" height="256"></img>
+      width="128" height="128"></img>
     </div>
     <div>
       <input type="button" value="PLAY" onclick="play()">
       <input type="button" value="TWIRL" onclick="renderer(1, 'allTwirl', 400)">
+      <input type="button" value="BISCUITS" onclick="renderer(1, 'allBiscuits', 400)">
+      <input type="button" value="TAUNT" onclick="renderer(1, 'allTaunt', 400)">
+    </div>
+    <div>
+      Audio sourced from <a href="https://www.youtube.com/watch?v=ZXzEOhGyW2k">
+        Classical Entertainment System
+      </a> on YouTube
     </div>
     <script>
       let dancelist = [
@@ -62,7 +69,7 @@
         "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
         // A: measure 8
         "m1Left", "m2Left", "m3Left", "m4Left",
-        "speedfunny2",
+        "speedup",
         // B: measure 1
         "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
         // B: measure 2
@@ -96,7 +103,7 @@
         "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
         "m1Left", "m2Left", "m3Left", "m4Left",
         "m1Right", "m2Right", "m3Right", "m4Right",
-        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allTwirl", "allTwirl", "allTwirl", "allTaunt",
         "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
         "m1Left", "m2Left", "m3Left", "m4Left",
         "m1Right", "m2Right", "m3Right", "m4Right",
@@ -104,7 +111,7 @@
         "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
         "m1Left", "m2Left", "m3Left", "m4Left",
         "m1Right", "m2Right", "m3Right", "m4Right",
-        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allTwirl", "allTwirl", "allTwirl", "allBiscuits",
         // BACK TO A
         "m1Left", "m2Left", "m3Left", "m4Left",
         // A: measure 1
@@ -123,12 +130,12 @@
         "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
         // A: measure 8
         "allLeft", "allRight",
+        "m1Twirl", "m2Twirl",
         "allLeft", "allRight",
-        "allLeft", "allRight",
-        "allLeft", "allRight",
-        "allLeft", "allRight",
-        "allLeft", "allRight",
-        "allLeft", "allRight",
+        "m3Twirl", "m4Twirl",
+        "m1Twirl", "m2Twirl",
+        "m3Twirl", "m4Twirl",
+        "allBiscuits", "allBiscuits",
         "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
         "m1Left", "m2Left", "m3Left", "m4Left",
         "m1Right", "m2Right", "m3Right", "m4Right",
@@ -136,7 +143,7 @@
         "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
         "m1Left", "m2Left", "m3Left", "m4Left",
         "m1Right", "m2Right", "m3Right", "m4Right",
-        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allTwirl", "allTwirl", "allTwirl", "allTaunt",
         "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
         "m1Left", "m2Left", "m3Left", "m4Left",
         "m1Right", "m2Right", "m3Right", "m4Right",
@@ -146,41 +153,34 @@
         "m1Right", "m2Right", "m3Right", "m4Right",
         // ONTO THE FINALE !
         "allLeft", "allRight", "allLeft", "allRight",
+        "m1Biscuits", "m2Biscuits", "m3Biscuits", "m4Biscuits",
         "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
+        "m1Biscuits", "m2Biscuits", "m3Biscuits", "m4Biscuits",
 
         "allLeft", "allRight", "allLeft", "allRight",
         "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
+        "m1Twirl", "m2Twirl", "m3Twirl", "m4Twirl",
 
-        "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
+        "allTwirl", "allTwirl", "allTwirl", "allTwirl",
+        "allLeft", "skip", "allRight", "skip",
+        "allLeft", "skip", "allRight", "skip",
+        "allLeft", "skip", "allRight", "skip",
 
-        "allLeft", "allRight", "allLeft", "allRight",
-        "allLeft", "allRight", "allLeft", "allRight",
-
-        "allLeft", "allRight", "allLeft", "allRight",
-        "allTwirl", "skip", "skip", "skip",
-        
-        "allTwirl", "skip", "skip", "skip",
-        "allTwirl", "skip", "skip", "skip",
-        "allTwirl", "skip", "skip", "skip",
+        "allLeftPaw", "allRightPaw", "allLeftPaw", "allRightPaw",
         "allTwirl", "skip", "skip", "skip",
 
         "allTwirl", "skip", "skip", "skip",
+        "allBiscuits", "allBiscuits", "allBiscuits", "allBiscuits",
 
-        "allTwirl",
+        "allBiscuits",
 
       ];
       let active = false;
-      let firstOrientation = "downLeft";
-      let secondOrientation = "downLeft";
-      let thirdOrientation = "downLeft";
-      let fourthOrientation = "downLeft";
+      let firstOrientation = ["downLeft"];
+      let secondOrientation = ["downLeft"];
+      let thirdOrientation = ["downLeft"];
+      let fourthOrientation = ["downLeft"];
       console.log(active);
       function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -224,10 +224,10 @@
         leftStretch(m2);
         leftStretch(m3);
         leftStretch(m4);
-        firstOrientation = "leftStretch";
-        secondOrientation = "leftStretch";
-        thirdOrientation = "leftStretch"; 
-        fourthOrientation = "leftStretch";
+        firstOrientation[0] = "leftStretch";
+        secondOrientation[0] = "leftStretch";
+        thirdOrientation[0] = "leftStretch"; 
+        fourthOrientation[0] = "leftStretch";
         console.log("Turned to the left!");
       }
       function allRight(m1, m2, m3, m4){
@@ -235,10 +235,10 @@
         rightStretch(m2);
         rightStretch(m3);
         rightStretch(m4);
-        firstOrientation = "rightStretch"; 
-        secondOrientation = "rightStretch"; 
-        thirdOrientation = "rightStretch"; 
-        fourthOrientation = "rightStretch";
+        firstOrientation[0] = "rightStretch"; 
+        secondOrientation[0] = "rightStretch"; 
+        thirdOrientation[0] = "rightStretch"; 
+        fourthOrientation[0] = "rightStretch";
         console.log("Turned to the right!");
       }
       function allLeftPaw(m1, m2, m3, m4){
@@ -246,20 +246,20 @@
         downLeft(m2);
         downLeft(m3);
         downLeft(m4);
-        firstOrientation = "downLeft"; 
-        secondOrientation = "downLeft";  
-        thirdOrientation = "downLeft"; 
-        fourthOrientation = "downLeft"; 
+        firstOrientation[0] = "downLeft"; 
+        secondOrientation[0] = "downLeft";  
+        thirdOrientation[0] = "downLeft"; 
+        fourthOrientation[0] = "downLeft"; 
       }
       function allRightPaw(m1, m2, m3, m4){
         downRight(m1);
         downRight(m2);
         downRight(m3);
         downRight(m4);
-        firstOrientation = "downRight"; 
-        secondOrientation = "downRight";  
-        thirdOrientation = "downRight"; 
-        fourthOrientation = "downRight"; 
+        firstOrientation[0] = "downRight"; 
+        secondOrientation[0] = "downRight";  
+        thirdOrientation[0] = "downRight"; 
+        fourthOrientation[0] = "downRight"; 
       }
       function moveNextOrientation(m, orientation){
         switch(orientation){
@@ -294,7 +294,8 @@
       async function twirl(m, orientation, ms){
         for(let i = 0; i < 8; i++)
         {
-          orientation = moveNextOrientation(m, orientation);
+          orientation[0] = moveNextOrientation(m, orientation[0]);
+          console.log(orientation[0]);
           if(i == 7) break;
           await sleep(ms/8);
         }
@@ -305,7 +306,65 @@
         twirl(m3, thirdOrientation, ms);
         twirl(m4, fourthOrientation, ms);
       }
+      async function biscuits(m, orientation, ms){
+        for(let i = 0; i < 8; i++)
+        {
+          
+          if(i % 2 == 0){
+            downLeft(m);
+            orientation[0] = "downLeft";
+          }
+          else{
+            downRight(m);
+            orientation[0] = "downRight";
+          }
+          console.log(i);
+          console.log(i % 2);
+          console.log(orientation[0]);
+          if(i == 7) break;
+          await sleep(ms/8);
+        }
+      }
+      async function allBiscuits(m1, m2, m3, m4, ms){
+        biscuits(m1, firstOrientation, ms);
+        biscuits(m2, secondOrientation, ms);
+        biscuits(m3, thirdOrientation, ms);
+        biscuits(m4, fourthOrientation, ms);
+      }
+      async function allTwirl(m1, m2, m3, m4, ms){
+        twirl(m1, firstOrientation, ms);
+        twirl(m2, secondOrientation, ms);
+        twirl(m3, thirdOrientation, ms);
+        twirl(m4, fourthOrientation, ms);
+      }
+      async function taunt(m, orientation, ms){
+        for(let i = 0; i < 8; i++)
+        {
+          
+          if(i % 2 == 0){
+            upLeft(m);
+            orientation[0] = "upLeft";
+          }
+          else{
+            upRight(m);
+            orientation[0] = "upRight";
+          }
+          console.log(i);
+          console.log(i % 2);
+          console.log(orientation[0]);
+          if(i == 7) break;
+          await sleep(ms/8);
+        }
+      }
+      async function allTaunt(m1, m2, m3, m4, ms){
+        taunt(m1, firstOrientation, ms);
+        taunt(m2, secondOrientation, ms);
+        taunt(m3, thirdOrientation, ms);
+        taunt(m4, fourthOrientation, ms);
+      }
       async function renderer(beat, move, ms){
+        console.log("I'm starting with...");
+        console.log(firstOrientation[0]);
         let m1 = document.getElementById("mightyena1");
         let m2 = document.getElementById("mightyena2");
         let m3 = document.getElementById("mightyena3");
@@ -313,35 +372,35 @@
         switch (move) {
           case "m1Left":
             leftStretch(m1);
-            firstOrientation = "leftStretch";
+            firstOrientation[0] = "leftStretch";
             break;
           case "m2Left":
             leftStretch(m2);
-            secondOrientation = "leftStretch";
+            secondOrientation[0] = "leftStretch";
             break;
           case "m3Left":
             leftStretch(m3);
-            thirdOrientation = "leftStretch";
+            thirdOrientation[0] = "leftStretch";
             break;
           case "m4Left":
             leftStretch(m4);
-            fourthOrientation = "leftStretch";
+            fourthOrientation[0] = "leftStretch";
             break;
           case "m1Right":
             rightStretch(m1);
-            firstOrientation = "rightStretch";
+            firstOrientation[0] = "rightStretch";
             break;
           case "m2Right":
             rightStretch(m2);
-            secondOrientation = "rightStretch";
+            secondOrientation[0] = "rightStretch";
             break;
           case "m3Right":
             rightStretch(m3);
-            thirdOrientation = "rightStretch";
+            thirdOrientation[0] = "rightStretch";
             break;
           case "m4Right":
             rightStretch(m4);
-            fourthOrientation = "rightStretch";
+            fourthOrientation[0] = "rightStretch";
             break;
           case "allLeft":
             allLeft(m1, m2, m3, m4);
@@ -370,6 +429,36 @@
           case "allTwirl":
             allTwirl(m1, m2, m3, m4, ms);
             break;
+          case "m1Biscuits":
+            biscuits(m1, firstOrientation, ms);
+            break;
+          case "m2Biscuits":
+            biscuits(m2, secondOrientation, ms);
+            break;
+          case "m3Biscuits":
+            biscuits(m3, thirdOrientation, ms);
+            break;
+          case "m4Biscuits":
+            biscuits(m4, fourthOrientation, ms);
+            break;
+          case "allBiscuits":
+            allBiscuits(m1, m2, m3, m4, ms);
+            break;
+          case "m1Taunt":
+            taunt(m1, firstOrientation, ms);
+            break;
+          case "m2Taunt":
+            taunt(m2, secondOrientation, ms);
+            break;
+          case "m3Taunt":
+            taunt(m3, thirdOrientation, ms);
+            break;
+          case "m4Taunt":
+            taunt(m4, fourthOrientation, ms);
+            break;
+          case "allTaunt":
+            allTaunt(m1, m2, m3, m4, ms);
+            break;
           case "skip":
             break;
           default:
@@ -388,20 +477,9 @@
           index = index + 1;
           console.log(move);
           console.log(beat);
-          console.log(firstOrientation);
-          if(move == "speedfunny"){
-            bpm = 2 * 110;
-            ms = 1000 * (60 / bpm);
-            continue;
-          }
-          if(move == "speedfunny2"){
+          if(move == "speedup"){
             bpm = 2 * 89.5;
             ms = 1000 * (60 / bpm);
-          }
-          if(move == "slowdown"){
-            bpm = bpm - 8;
-            ms = 1000 * (60 / bpm);
-            continue;
           }
           renderer(beat, move, ms);
           await sleep(ms);
